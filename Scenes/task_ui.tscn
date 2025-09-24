@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcax00r3lggyd"]
+
+[ext_resource type="Script" uid="uid://l5njlpi80p8m" path="res://Scripts/task_ui.gd" id="1_0qrbr"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3076q"]
+color = Color(0, 0, 0, 0)
+
+[node name="Task_Ui" type="CanvasLayer"]
+script = ExtResource("1_0qrbr")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.8515625
+anchor_right = 1.0
+anchor_bottom = 0.06481481
+grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+theme_override_styles/separator = SubResource("StyleBoxLine_3076q")
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer"]
+layout_mode = 2
+text = "Enemies to kill :"
+horizontal_alignment = 2
+
+[node name="To_kill" type="Label" parent="Panel/HBoxContainer"]
+layout_mode = 2
+text = "00"

@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://hea2vmr2502b"]
+
+[ext_resource type="Texture2D" uid="uid://qol2k40k1wmr" path="res://Assets/level1.png" id="1_266r4"]
+[ext_resource type="Texture2D" uid="uid://cockehdodk73w" path="res://Assets/BG2 zapote bridge.png" id="2_gykkg"]
+[ext_resource type="PackedScene" uid="uid://2dpk3qru1177" path="res://Scenes/Andress.tscn" id="3_eqp5k"]
+[ext_resource type="PackedScene" uid="uid://dq2x58w3qd2k4" path="res://Scenes/mabini.tscn" id="4_vce4q"]
+[ext_resource type="PackedScene" uid="uid://bulgwodt4vg1j" path="res://Scenes/pause.tscn" id="5_e02wx"]
+[ext_resource type="AudioStream" uid="uid://b8frlf6bxcj2i" path="res://Assets/Sfx/water-flowing-sound-327661.mp3" id="6_y1fls"]
+[ext_resource type="Script" uid="uid://ddjc5yplgw8sg" path="res://Scenes/audio_stream_player_2d.gd" id="7_aifas"]
+[ext_resource type="PackedScene" uid="uid://p37iijc02mdf" path="res://Scenes/spawner.tscn" id="8_0rcf1"]
+
+[node name="2nd" type="Node2D"]
+position = Vector2(0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 2.0
+offset_top = 46.0
+offset_right = 1179.0
+offset_bottom = 664.0
+texture = ExtResource("1_266r4")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -4.0
+offset_top = -26.0
+offset_right = 1176.0
+offset_bottom = 154.0
+mouse_filter = 2
+texture = ExtResource("2_gykkg")
+expand_mode = 1
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_eqp5k")]
+position = Vector2(581, 267)
+detection_range = 100.0
+stop_distance = 130.0
+attack_cooldown = 0.5
+
+[node name="Mabini" parent="." groups=["allies"] instance=ExtResource("4_vce4q")]
+position = Vector2(533, 453)
+heal_range = 1000.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("5_e02wx")]
+offset_left = 13.0
+offset_top = -7.0
+offset_right = 13.0
+offset_bottom = -7.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_y1fls")
+volume_db = -21.353
+autoplay = true
+bus = &"Music"
+script = ExtResource("7_aifas")
+
+[node name="Spawner" parent="." instance=ExtResource("8_0rcf1")]
+total_enemies_to_spawn = 15
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="AudioStreamPlayer2D" method="_on_finished"]

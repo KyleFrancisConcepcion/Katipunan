@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://co2usjgc5ewi7"]
+
+[ext_resource type="Script" uid="uid://cjqhjba531el5" path="res://Scripts/Levels.gd" id="1_rwcms"]
+[ext_resource type="Texture2D" uid="uid://qol2k40k1wmr" path="res://Assets/level1.png" id="1_uttew"]
+[ext_resource type="PackedScene" uid="uid://bnop5wxhi1drc" path="res://Scenes/Level 2.tscn" id="2_empr2"]
+[ext_resource type="PackedScene" uid="uid://dq2x58w3qd2k4" path="res://Scenes/mabini.tscn" id="2_vgl5k"]
+[ext_resource type="PackedScene" uid="uid://2dpk3qru1177" path="res://Scenes/Andress.tscn" id="3_o30o5"]
+[ext_resource type="Texture2D" uid="uid://cockehdodk73w" path="res://Assets/BG2 zapote bridge.png" id="4_s3fo5"]
+[ext_resource type="PackedScene" uid="uid://b6aoju8cb45hu" path="res://Scenes/enemy_spawner.tscn" id="5_rwcms"]
+[ext_resource type="PackedScene" uid="uid://bulgwodt4vg1j" path="res://Scenes/pause.tscn" id="5_sn8db"]
+[ext_resource type="AudioStream" uid="uid://b8frlf6bxcj2i" path="res://Assets/Sfx/water-flowing-sound-327661.mp3" id="6_0pjx5"]
+[ext_resource type="Script" uid="uid://ddjc5yplgw8sg" path="res://Scenes/audio_stream_player_2d.gd" id="7_0jf5j"]
+[ext_resource type="PackedScene" uid="uid://dcax00r3lggyd" path="res://Scenes/task_ui.tscn" id="11_8685r"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_t75go"]
+vertices = PackedVector2Array(1143, 150.96875, 1143, 636.0078, 8.9921875, 637.97656, 9, 148.02344)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1153, 141, 1153, 646, -1, 648, -1, 138)])
+
+[node name="CurrentLevel" type="Node"]
+script = ExtResource("1_rwcms")
+Max_Enimies = 1
+next_scene = ExtResource("2_empr2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = -0.021701388
+anchor_top = 0.024691358
+anchor_right = 1.015625
+anchor_bottom = 1.0416666
+texture = ExtResource("1_uttew")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = -0.00086805556
+anchor_top = -0.13271604
+anchor_right = 1.0234375
+anchor_bottom = 0.21450618
+mouse_filter = 2
+texture = ExtResource("4_s3fo5")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("5_sn8db")]
+offset_left = 7.0
+offset_top = -3.0
+offset_right = 7.0
+offset_bottom = -3.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0pjx5")
+volume_db = -21.353
+autoplay = true
+bus = &"Music"
+script = ExtResource("7_0jf5j")
+
+[node name="Mabini" parent="." instance=ExtResource("2_vgl5k")]
+position = Vector2(56.16966, 203.13167)
+
+[node name="Andres" parent="." instance=ExtResource("3_o30o5")]
+position = Vector2(50.999996, 410)
+scale = Vector2(0.846108, 0.837414)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_t75go")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("5_rwcms")]
+position = Vector2(1305.1202, 304.11066)
+
+[node name="Task_Ui" parent="." instance=ExtResource("11_8685r")]
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="AudioStreamPlayer2D" method="_on_finished"]
