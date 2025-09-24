@@ -28,6 +28,7 @@ signal healthChanged
 
 
 func _ready() -> void:
+	animated_sprite.play("Idle")
 	pathtimer.timeout.connect(_new_path)
 	
 	click_position = position
@@ -48,8 +49,6 @@ func _physics_process(delta):
 			_target_position(click_position)
 		if position.distance_to(click_position) > 3:
 			target_position = (click_position - position).normalized()
-			#velocity = target_position * speed	
-			#animated_sprite.flip_h = target_position.x < 0
 			velocity = current_pos.direction_to(next_pos) * (speed + delta) 
 			animated_sprite.play("Walk")
 			animated_sprite.flip_h = target_position.x < 0
@@ -125,6 +124,6 @@ func _target_position(target: Vector2) -> void:
 	path.target_position = target
 	
 func _new_path() -> void:
-	_target_position(click_position)
+	_target_position(path.target_position)
 	if path.is_target_reached():
-		position = click_position
+		position = global_position

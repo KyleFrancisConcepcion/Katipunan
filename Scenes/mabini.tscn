@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cfd230mi12ht5" path="res://Assets/Sfx/healing-magic-2-378663.mp3" id="11_styp6"]
 [ext_resource type="AudioStream" uid="uid://83ch3sgvtdxq" path="res://Assets/Sfx/male-death-sound-128357.mp3" id="12_qbal7"]
 [ext_resource type="Script" uid="uid://cv6jijglku75e" path="res://Scripts/Character_UI.gd" id="13_4mxk8"]
-[ext_resource type="Theme" uid="uid://ou768xy87pf7" path="res://Buttons.tres" id="14_ikdcs"]
+[ext_resource type="Theme" uid="uid://ou768xy87pf7" path="res://RakeTheme.tres" id="14_ikdcs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_37817"]
 atlas = ExtResource("2_wv8ap")
@@ -449,6 +449,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ikdcs")
 path_desired_distance = 4.0
 target_desired_distance = 4.0
 path_postprocessing = 1
+debug_enabled = true
 
 [node name="Pathtimer" type="Timer" parent="."]
 wait_time = 0.1
